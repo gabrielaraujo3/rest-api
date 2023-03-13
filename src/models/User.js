@@ -49,6 +49,11 @@ export default class User extends Model {
         user.password_hash = await bcryptjs.hashSync(user.password, 8);
       }
     });
+
     return this;
+  }
+
+  passwordIsValid(password) {
+    return bcryptjs.compare(password, this.password_hash);
   }
 }
